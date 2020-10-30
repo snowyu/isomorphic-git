@@ -45,6 +45,7 @@ describe('exports', () => {
         "listServerRefs",
         "listTags",
         "log",
+        "logFile",
         "merge",
         "packObjects",
         "pull",

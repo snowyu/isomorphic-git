@@ -37,6 +37,7 @@ import { listRemotes } from './api/listRemotes.js'
 import { listServerRefs } from './api/listServerRefs.js'
 import { listTags } from './api/listTags.js'
 import { log } from './api/log.js'
+import { logFile } from './api/logFile.js'
 import { merge } from './api/merge.js'
 import { packObjects } from './api/packObjects.js'
 import { pull } from './api/pull.js'
@@ -107,6 +108,7 @@ export {
   listServerRefs,
   listTags,
   log,
+  logFile,
   merge,
   packObjects,
   pull,
@@ -176,6 +178,7 @@ export default {
   listServerRefs,
   listTags,
   log,
+  logFile,
   merge,
   packObjects,
   pull,
