@@ -2,6 +2,7 @@
 import '../typedefs.js'
 
 import { _log } from '../commands/log.js'
+import { _logFile } from '../commands/logFile.js'
 import { FileSystem } from '../models/FileSystem.js'
 import { assertParameter } from '../utils/assertParameter.js'
 import { join } from '../utils/join.js'
@@ -13,10 +14,13 @@ import { join } from '../utils/join.js'
  * @param {FsClient} args.fs - a file system client
  * @param {string} [args.dir] - The [working tree](dir-vs-gitdir.md) directory path
  * @param {string} [args.gitdir=join(dir,'.git')] - [required] The [git directory](dir-vs-gitdir.md) path
+ * @param {string=} args.filepath optional get the commit for the filepath only
  * @param {string} [args.ref = 'HEAD'] - The commit to begin walking backwards through the history from
  * @param {number} [args.depth] - Limit the number of commits returned. No limit by default.
  * @param {Date} [args.since] - Return history newer than the given date. Can be combined with `depth` to get whichever is shorter.
  * @param {object} [args.cache] - a [cache](cache.md) object
+ * @param {boolean=} args.force do not throw error if filepath is not exist (works only for a single file). defaults to false
+ * @param {boolean=} args.follow Continue listing the history of a file beyond renames (works only for a single file). defaults to false
  *
  * @returns {Promise<Array<ReadCommitResult>>} Resolves to an array of ReadCommitResult objects
  * @see ReadCommitResult
@@ -36,24 +40,40 @@ export async function log({
   fs,
   dir,
   gitdir = join(dir, '.git'),
+  filepath,
   ref = 'HEAD',
   depth,
   since, // Date
   cache = {},
+  force,
+  follow,
 }) {
   try {
     assertParameter('fs', fs)
     assertParameter('gitdir', gitdir)
     assertParameter('ref', ref)
-
-    return await _log({
-      fs: new FileSystem(fs),
-      cache,
-      gitdir,
-      ref,
-      depth,
-      since,
-    })
+    if (filepath) {
+      const result = await _logFile({
+        fs: new FileSystem(fs),
+        cache,
+        gitdir,
+        filepath,
+        ref,
+        depth,
+        since,
+        force,
+        follow,
+      })
+      return result.map(item => item.commit)
+    } else
+      return await _log({
+        fs: new FileSystem(fs),
+        cache,
+        gitdir,
+        ref,
+        depth,
+        since,
+      })
   } catch (err) {
     err.caller = 'git.log'
     throw err

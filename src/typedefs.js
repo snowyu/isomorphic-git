@@ -60,6 +60,12 @@ import './typedefs-http.js'
  */
 
 /**
+ * @typedef {Object} ReadFileCommitResult
+ * @property {string} oid - SHA-1 object id of this file
+ * @property {ReadCommitResult} commit - the ReadCommitResult object
+ */
+
+/**
  * @typedef {Object} ServerRef - This object has the following schema:
  * @property {string} ref - The name of the ref
  * @property {string} oid - The SHA-1 object id the ref points to
