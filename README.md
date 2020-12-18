@@ -175,6 +175,7 @@ unless there is a major version bump.
 - [listServerRefs](https://isomorphic-git.github.io/docs/listServerRefs.html)
 - [listTags](https://isomorphic-git.github.io/docs/listTags.html)
 - [log](https://isomorphic-git.github.io/docs/log.html)
+- [logFile](https://isomorphic-git.github.io/docs/logFile.html)
 - [merge](https://isomorphic-git.github.io/docs/merge.html)
 - [packObjects](https://isomorphic-git.github.io/docs/packObjects.html)
 - [pull](https://isomorphic-git.github.io/docs/pull.html)
