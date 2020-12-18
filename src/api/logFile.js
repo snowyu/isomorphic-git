@@ -11,7 +11,7 @@ import { join } from '../utils/join.js'
  *
  * @param {object} args
  * @param {FsClient} args.fs - a file system client
- * @param {any} args.cache - optional cache object
+ * @param {object} [args.cache] - a [cache](cache.md) object
  * @param {string} [args.dir] - The [working tree](dir-vs-gitdir.md) directory path
  * @param {string} [args.gitdir=join(dir,'.git')] - [required] The [git directory](dir-vs-gitdir.md) path
  * @param {string=} args.filepath get the commit for the filepath
